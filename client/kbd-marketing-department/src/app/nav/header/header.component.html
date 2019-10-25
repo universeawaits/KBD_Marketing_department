@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button *ngFor="let action of actions" mat-button [routerLink]="[action.path]">
+            {{ action.name }}
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
