@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KBD_Marketing_department.Services;
+using KBD_Marketing_department.WEB.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace KBD_Marketing_department
+namespace KBD_Marketing_department.WEB
 {
     public class Startup
     {
@@ -25,10 +25,8 @@ namespace KBD_Marketing_department
         {
             string conn = Configuration.GetConnectionString("MarketingConnection");
 
-            services.AddTransient(services => new ProductService(conn));
-
             services.AddCors();
-            services.AddRouting();
+            services.AddTransient(services => new ProductService(conn));
             services.AddControllers();
         }
 
@@ -41,15 +39,14 @@ namespace KBD_Marketing_department
 
             app.UseCors(x => x
                 .AllowAnyOrigin()
-                .AllowAnyMethod()
                 .AllowAnyHeader()
+                .AllowAnyMethod()
                 );
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(builder =>
             {
-                endpoints.MapControllers();
+                builder.MapControllers();
             });
         }
     }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace KBD_Marketing_department
+namespace KBD_Marketing_department.WEB
 {
     public class Program
     {

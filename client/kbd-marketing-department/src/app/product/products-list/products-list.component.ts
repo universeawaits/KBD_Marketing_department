@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'products-list',
@@ -23,19 +24,18 @@ export class ProductsListComponent implements OnInit {
 
   products: any[];
 
-  constructor() { }
+  constructor(
+    private productService: ProductService
+  ) { }
 
-  ngOnInit() { 
-    this.products = PRODUCTS;
-    this.dataSource = new MatTableDataSource(this.products);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit() {
+    this.productService.getAllProducts().subscribe(
+      products => {
+        this.products = products;
+        this.dataSource = new MatTableDataSource(this.products);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );    
   }
 }
-
-const PRODUCTS = [
-  { Code: 1, Name: 'Apple', Category: 'Food', Price: 1 },
-  { Code: 2, Name: 'For Menacy', Category: 'Book', Price: 25 },
-  { Code: 3, Name: 'Anatomy Works by ...nnnnnnnn', Category: 'Book', Price: 30 },
-  { Code: 4, Name: 'Light top fit', Category: 'Clothing', Price: 2 }
-];

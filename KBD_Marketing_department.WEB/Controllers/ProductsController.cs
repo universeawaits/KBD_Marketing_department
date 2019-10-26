@@ -1,14 +1,12 @@
-﻿using System;
+﻿using KBD_Marketing_department.WEB.Models;
+using KBD_Marketing_department.WEB.Services;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KBD_Marketing_department.Models;
-using KBD_Marketing_department.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-
-namespace KBD_Marketing_department.Controllers
+namespace KBD_Marketing_department.WEB.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -25,6 +23,12 @@ namespace KBD_Marketing_department.Controllers
         public async Task CreateProduct([FromBody] Product product)
         {
             await productService.CreateProduct(product);
+        }
+
+        [HttpGet]
+        public async Task<ICollection<Product>> GetAllProducts()
+        {
+            return await productService.GetAllProducts();
         }
     }
 }

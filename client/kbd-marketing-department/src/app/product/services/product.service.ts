@@ -14,18 +14,16 @@ export class ProductService {
   ) { }
 
   createProduct(product: any): Observable<any> {
-    return this.httpClient.post(
-      this.productsUrl,
-      {
-        Name: product.name,
-        Manufacturer: product.manufactorer,
-        Category: product.category,
-        Price: product.price,
-      }
-    );
+    let productBody: any = {
+      Name: product.name,
+      Manufacturer: product.manufacturer,
+      Category: product.category,
+      Price: product.price,
+    };
+    return this.httpClient.post<any>(this.productsUrl, productBody);
   }
 
-  getAllProducts() {
-    return this.httpClient.get(this.productsUrl);
+  getAllProducts(): Observable<any> {
+    return this.httpClient.get<any>(this.productsUrl);
   }
 }

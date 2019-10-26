@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-
-namespace KBD_Marketing_department.Models
+namespace KBD_Marketing_department.WEB.Models
 {
     public class Product
     {
