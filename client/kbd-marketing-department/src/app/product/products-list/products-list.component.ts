@@ -12,8 +12,9 @@ export class ProductsListComponent implements OnInit {
   displayedColumns: string[] = [ 
     'Code', 
     'Name', 
-    'CategoryName',
-    'Price' 
+    'Category',
+    'Price',
+    'Actions'
   ];
   dataSource: MatTableDataSource<any>;
   
@@ -33,8 +34,8 @@ export class ProductsListComponent implements OnInit {
 }
 
 const PRODUCTS = [
-  { Code: 1, Name: 'Apple', CategoryName: 'Food', Price: 1 },
-  { Code: 2, Name: 'For Menacy', CategoryName: 'Book', Price: 25 },
-  { Code: 3, Name: 'Anatomy Works by ...', CategoryName: 'Book', Price: 30 },
-  { Code: 4, Name: 'Light top fit', CategoryName: 'Clothing', Price: 2 }
+  { Code: 1, Name: 'Apple', Category: 'Food', Price: 1 },
+  { Code: 2, Name: 'For Menacy', Category: 'Book', Price: 25 },
+  { Code: 3, Name: 'Anatomy Works by ...nnnnnnnn', Category: 'Book', Price: 30 },
+  { Code: 4, Name: 'Light top fit', Category: 'Clothing', Price: 2 }
 ];

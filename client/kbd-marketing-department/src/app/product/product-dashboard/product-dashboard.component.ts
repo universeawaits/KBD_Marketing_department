@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { CreateProductComponent } from '../create-product/create-product.component';
 
 @Component({
-  selector: 'app-product-dashboard',
+  selector: 'product-dashboard',
   templateUrl: './product-dashboard.component.html',
   styleUrls: ['./product-dashboard.component.scss']
 })
 export class ProductDashboardComponent implements OnInit {
+  private createProductDialogConfig: MatDialogConfig;
 
-  constructor() { }
+  constructor(
+    private createProductDialog: MatDialog
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.createProductDialogConfig = new MatDialogConfig();
   }
 
+  openCreateProductDialog() {
+    this.createProductDialog.open(CreateProductComponent, this.createProductDialogConfig);
+  }
 }

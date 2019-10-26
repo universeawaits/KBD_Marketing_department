@@ -1,1 +1,22 @@
-<p>create-product works!</p>
+<form [formGroup]="createForm" class="create-product-form">
+    <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="Name">
+        <mat-error *ngIf="createForm.get('name').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="manufacturer" type="text" placeholder="Manufacturer">
+        <mat-error *ngIf="createForm.get('manufacturer').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="category" type="text" placeholder="Category">
+        <mat-error *ngIf="createForm.get('category').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput min="0" formControlName="price" type="number" placeholder="Price">
+        <mat-error *ngIf="createForm.get('price').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <button type="button" mat-icon-button [disabled]="createForm.invalid" (click)="submit()">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>
