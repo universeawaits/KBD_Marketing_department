@@ -24,4 +24,15 @@ namespace KBD_Marketing_department.WEB.Models
         public DateTime DateTime { get; set; }
         public int Price { get; set; }
     }
+
+    public class ProductEdit
+    {
+        // PK
+        public int Code { get; set; }
+        public string Manufacturer { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int Price { get; set; }
+        public int OldPrice { get; set; }
+    }
 }

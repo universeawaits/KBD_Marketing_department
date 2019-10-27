@@ -234,3 +234,7 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 .mat-cell, .mat-header-cell {
   font-family: 'Chakra Petch';
 }
+
+body {
+  min-width: 740px;
+}

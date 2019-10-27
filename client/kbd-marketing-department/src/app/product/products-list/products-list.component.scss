@@ -1,5 +1,6 @@
 .table-container {
-    width: 50%;
+    width: 60%;
+    min-width: 700px;
 
     padding: 20px;
 }
@@ -8,17 +9,26 @@ table {
     width: 100%;
 }
 
-.name-column {
-    width: 50%;
-}
-
 .code-column {
     width: 10%;
     min-width: 80px;
 }
 
+.manufacturer-column {
+    width: 40%;
+}
+
+.name-column {
+    width: 50%;
+    min-width: 100px;
+}
+
 .category-column {
-    width: 25%;
+    width: 30%;
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .price-column {

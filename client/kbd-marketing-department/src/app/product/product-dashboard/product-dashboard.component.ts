@@ -8,17 +8,13 @@ import { CreateProductComponent } from '../create-product/create-product.compone
   styleUrls: ['./product-dashboard.component.scss']
 })
 export class ProductDashboardComponent implements OnInit {
-  private createProductDialogConfig: MatDialogConfig;
-
   constructor(
     private createProductDialog: MatDialog
   ) { }
 
-  ngOnInit() { 
-    this.createProductDialogConfig = new MatDialogConfig();
-  }
+  ngOnInit() { }
 
   openCreateProductDialog() {
-    this.createProductDialog.open(CreateProductComponent, this.createProductDialogConfig);
+    this.createProductDialog.open(CreateProductComponent);
   }
 }

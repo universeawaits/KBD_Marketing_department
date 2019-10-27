@@ -9,6 +9,7 @@ import 'hammerjs';
 import { ProductPriceHistoryComponent } from './product-price-history/product-price-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 
@@ -16,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     CreateProductComponent, 
     ProductsListComponent, 
-    ProductDashboardComponent, ProductPriceHistoryComponent
+    ProductDashboardComponent, ProductPriceHistoryComponent, EditProductComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule
   ],
   entryComponents: [
-    CreateProductComponent
+    CreateProductComponent,
+    EditProductComponent
   ]
 })
 export class ProductModule { }

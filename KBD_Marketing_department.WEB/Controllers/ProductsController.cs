@@ -36,5 +36,16 @@ namespace KBD_Marketing_department.WEB.Controllers
         {
             await productService.DeleteProduct(code);
         }
+
+        [HttpPut]
+        public async Task UpdateProduct([FromBody] ProductEdit product)
+        {
+            await productService.UpdateProduct(product);
+
+            if (product.Price != product.OldPrice)
+            {
+                await productService.CreateProductSnapshot(product);
+            }
+        }
     }
 }

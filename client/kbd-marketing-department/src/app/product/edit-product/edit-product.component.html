@@ -1,0 +1,18 @@
+<form *ngIf="editForm" [formGroup]="editForm" class="edit-product-form">
+    <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="Name">
+        <mat-error *ngIf="editForm.get('name').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="category" type="text" placeholder="Category">
+        <mat-error *ngIf="editForm.get('category').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput min="0" formControlName="price" type="number" placeholder="Price">
+        <mat-error *ngIf="editForm.get('price').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <button type="button" mat-icon-button [disabled]="editForm.invalid" (click)="submit()">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>

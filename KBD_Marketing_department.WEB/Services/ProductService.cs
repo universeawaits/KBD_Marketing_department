@@ -11,7 +11,9 @@ namespace KBD_Marketing_department.WEB.Services
     {
         public NpgsqlConnection Connection { get; set; }
         private NpgsqlDataReader reader;
+
         private string productsTableName;
+        private string productsSnapshotsTableName;
 
         public ProductService(string connString)
         {
@@ -19,6 +21,7 @@ namespace KBD_Marketing_department.WEB.Services
             Connection.Open();
 
             productsTableName = "products";
+            productsSnapshotsTableName = "products_snapshots";
         }
 
         public async Task<ICollection<Product>> GetAllProducts()
@@ -81,6 +84,33 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"delete from {productsTableName} where code = {code}",
+                Connection
+                ))
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+
+        public async Task UpdateProduct(ProductEdit product)
+        {
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"update {productsTableName} set " +
+                $"name = '{product.Name}', category = '{product.Category}', price = {product.Price}" +
+                $"where code = {product.Code}",
+                Connection
+                ))
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+
+        public async Task CreateProductSnapshot(ProductEdit product)
+        {
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"insert into {productsSnapshotsTableName} (manufacturer, datetime, name, price) values" +
+                $"('{product.Manufacturer}', '{DateTime.Now}', '{product.Name}', {product.Price}); ",
                 Connection
                 ))
             {

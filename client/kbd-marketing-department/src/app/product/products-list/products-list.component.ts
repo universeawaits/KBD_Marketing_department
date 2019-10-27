@@ -5,6 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../services/product.service';
 import { ProductListHistoryBindService } from '../services/product-list-history-bind.service';
 import { ProductListAddBindService } from '../services/product-list-add-bind.service';
+import { ProductListEditBindService } from '../services/product-list-edit-bind.service';
+import { MatDialog } from '@angular/material';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 @Component({
   selector: 'products-list',
@@ -13,8 +16,9 @@ import { ProductListAddBindService } from '../services/product-list-add-bind.ser
 })
 export class ProductsListComponent implements OnInit {
   displayedColumns: string[] = [ 
-    'Code', 
-    'Name', 
+    'Code',
+    'Manufacturer',
+    'Name',
     'Category',
     'Price',
     'Actions'
@@ -29,7 +33,9 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private productListHistoryBindService: ProductListHistoryBindService,
-    private productListAddBindService: ProductListAddBindService
+    private productListEditBindService: ProductListEditBindService,
+    private productListAddBindService: ProductListAddBindService,
+    private editProductDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -53,10 +59,17 @@ export class ProductsListComponent implements OnInit {
   deleteProduct(code: any){
     this.productService.deleteProduct(code).subscribe(
       () => {
-        console.log(code)
-          this.products = this.products.filter(product => product.code != code);
-          this.dataSource.data = this.products;
+        this.products = this.products.filter(product => product.code != code);
+        this.dataSource.data = this.products;
       }
     )
+  }
+
+  editProduct(product: any) {
+    this.editProductDialog.open(EditProductComponent).afterOpened().subscribe(
+      () => {
+        this.productListEditBindService.selectProduct(product);
+      }
+    );
   }
 }

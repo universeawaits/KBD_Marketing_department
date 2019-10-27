@@ -24,7 +24,7 @@ export class CreateProductComponent implements OnInit {
       'manufacturer': new FormControl('', Validators.required),
       'category': new FormControl('', Validators.required),
       'price': new FormControl('', Validators.required),
-    })
+    });
   }
 
   submit() {

@@ -30,4 +30,16 @@ export class ProductService {
   deleteProduct(code: any) {
     return this.httpClient.delete(this.productsUrl + '?code=' + code);
   }
+
+  editProduct(product: any) {
+    let productBody: any = {
+      Code: product.code,
+      Name: product.name,
+      Manufacturer: product.manufacturer,
+      Category: product.category,
+      Price: product.price,
+      OldPrice: product.oldPrice
+    };
+    return this.httpClient.put(this.productsUrl, productBody);
+  }
 }
