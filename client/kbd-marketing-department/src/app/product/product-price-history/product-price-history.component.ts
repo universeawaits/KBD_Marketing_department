@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListHistoryBindService } from '../services/product-list-history-bind.service';
 import { ProductService } from '../services/product.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
   selector: 'product-price-history',
@@ -36,7 +36,22 @@ export class ProductPriceHistoryComponent implements OnInit {
           }
         );
       }
-    )
+    );
   }
 
+  changeDateFrom(event: MatDatepickerInputEvent<Date>) {
+    if (event.value) {
+      this.dataSource.data = this.snapshots.filter(
+        sn => Date.parse(sn.dateTime) >= event.value.valueOf()
+        );
+    }
+  }
+
+  changeDateTo(event: any) {
+    if (event.value) {
+      this.dataSource.data = this.snapshots.filter(
+        sn => Date.parse(sn.dateTime) <= event.value.valueOf()
+        );   
+    } 
+  }
 }
