@@ -19,16 +19,22 @@ namespace KBD_Marketing_department.WEB.Controllers
             this.productService = productService;
         }
 
-        [HttpPost]
-        public async Task CreateProduct([FromBody] Product product)
-        {
-            await productService.CreateProduct(product);
-        }
-
         [HttpGet]
         public async Task<ICollection<Product>> GetAllProducts()
         {
             return await productService.GetAllProducts();
+        }
+
+        [HttpPost]
+        public async Task<Product> CreateProduct([FromBody] Product product)
+        {
+            return await productService.CreateProduct(product);
+        }
+
+        [HttpDelete]
+        public async Task DeleteProduct([FromQuery] int code)
+        {
+            await productService.DeleteProduct(code);
         }
     }
 }

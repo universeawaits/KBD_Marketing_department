@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavModule } from './nav/nav.module';
 import { ProductModule } from './product/product.module';
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductModule } from './product/product.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     NavModule,
-    ProductModule
+    ProductModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

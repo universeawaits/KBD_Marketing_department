@@ -4,7 +4,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatPaginatorModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
 import 'hammerjs';
 import { ProductPriceHistoryComponent } from './product-price-history/product-price-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ],
   entryComponents: [
     CreateProductComponent

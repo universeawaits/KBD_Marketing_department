@@ -13,6 +13,10 @@ export class ProductService {
     private httpClient: HttpClient
   ) { }
 
+  getAllProducts(): Observable<any> {
+    return this.httpClient.get<any>(this.productsUrl);
+  }
+
   createProduct(product: any): Observable<any> {
     let productBody: any = {
       Name: product.name,
@@ -23,7 +27,7 @@ export class ProductService {
     return this.httpClient.post<any>(this.productsUrl, productBody);
   }
 
-  getAllProducts(): Observable<any> {
-    return this.httpClient.get<any>(this.productsUrl);
+  deleteProduct(code: any) {
+    return this.httpClient.delete(this.productsUrl + '?code=' + code);
   }
 }

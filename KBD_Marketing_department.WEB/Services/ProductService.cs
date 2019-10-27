@@ -21,26 +21,13 @@ namespace KBD_Marketing_department.WEB.Services
             productsTableName = "products";
         }
 
-        public async Task CreateProduct(Product product)
-        {
-            using (
-                NpgsqlCommand command = new NpgsqlCommand(
-                $"insert into {productsTableName} (manufacturer, name, category, price) values" +
-                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', {product.Price}); ",
-                Connection
-                ))
-            {
-                await command.ExecuteNonQueryAsync();
-            }            
-        }
-
         public async Task<ICollection<Product>> GetAllProducts()
         {
             ICollection<Product> products = new List<Product>();
 
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
-                $"select code, manufacturer, name, category, price from {productsTableName}", 
+                $"select code, manufacturer, name, category, price from {productsTableName}",
                 Connection
                 ))
             {
@@ -48,7 +35,8 @@ namespace KBD_Marketing_department.WEB.Services
 
                 while (await reader.ReadAsync())
                 {
-                    products.Add(new Product {
+                    products.Add(new Product
+                    {
                         Code = (int)reader[0],
                         Manufacturer = (string)reader[1],
                         Name = (string)reader[2],
@@ -59,6 +47,45 @@ namespace KBD_Marketing_department.WEB.Services
             }
 
             return products;
+        }
+
+        public async Task<Product> CreateProduct(Product product)
+        {
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"insert into {productsTableName} (manufacturer, name, category, price) values" +
+                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', {product.Price}); ",
+                Connection
+                ))
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select code from {productsTableName} where " +
+                $"name = '{product.Name}' and " +
+                $"manufacturer = '{product.Manufacturer}' and " +
+                $"category = '{product.Category}'",
+                Connection
+                ))
+            {
+                product.Code = (int) await command.ExecuteScalarAsync();
+            }
+
+            return product;
+        }
+
+        public async Task DeleteProduct(int code)
+        {
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"delete from {productsTableName} where code = {code}",
+                Connection
+                ))
+            {
+                await command.ExecuteNonQueryAsync();
+            }
         }
 
         public void Dispose()

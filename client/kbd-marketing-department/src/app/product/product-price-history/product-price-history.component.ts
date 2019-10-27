@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductListHistoryBindService } from '../services/product-list-history-bind.service';
 
 @Component({
   selector: 'product-price-history',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductPriceHistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private productListHistoryBindService: ProductListHistoryBindService
+  ) { }
 
   ngOnInit() {
   }

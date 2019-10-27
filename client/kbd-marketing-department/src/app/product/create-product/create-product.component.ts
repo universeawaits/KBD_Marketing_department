@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductService } from '../services/product.service';
+import { ProductListAddBindService } from '../services/product-list-add-bind.service';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'create-product',
@@ -11,7 +13,9 @@ export class CreateProductComponent implements OnInit {
   createForm: FormGroup;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private productListAddBindService: ProductListAddBindService,
+    private snackBarService: SnackBarService
   ) { }
 
   ngOnInit() {
@@ -24,22 +28,22 @@ export class CreateProductComponent implements OnInit {
   }
 
   submit() {
-    this.productService.createProduct(
-      {
-        name: this.createForm.get('name').value,
-        manufacturer: this.createForm.get('manufacturer').value,
-        category: this.createForm.get('category').value,
-        price: this.createForm.get('price').value,
-      }
-    ).subscribe(
-      () => {
-        console.log('product added');
+    let newProduct: any = {
+      name: this.createForm.get('name').value,
+      manufacturer: this.createForm.get('manufacturer').value,
+      category: this.createForm.get('category').value,
+      price: this.createForm.get('price').value
+    };
+
+    this.productService.createProduct(newProduct).subscribe(
+      product => {
+        this.productListAddBindService.addProduct(product)
       },
       () => {
-        console.log('error');
-      },
-      () => {
-        console.log('continuing');
+        this.snackBarService.openSnackBar(
+          'Name, manufacturer and category' + 
+          ' must be unique per product'
+          );
       }
     );
   }
