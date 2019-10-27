@@ -46,4 +46,8 @@ export class ProductService {
   getCategories(): Observable<string[]> {
     return this.httpClient.get<string[]>(this.productsUrl + '/categories');
   }
+
+  getProductSnapshots(code: any): Observable<any> {
+    return this.httpClient.get<any>(this.productsUrl + '/snapshots?code=' + code);
+  }
 }

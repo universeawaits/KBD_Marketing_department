@@ -1,1 +1,26 @@
-<p>product-price-history works!</p>
+<div class="table-container mat-elevation-z3">
+    <div *ngIf="!dataSource.data" class="no-select">Select a product to view it's price changes history</div>
+    <div *ngIf="dataSource.data && !dataSource.data.length" class="no-data">This product has no price changes above all time</div>
+
+    <table *ngIf="dataSource.data && dataSource.data.length" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="Date">
+            <th class="date-column" mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let row"> {{ row.dateTime | date }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Manufacturer">
+            <th class="manufacturer-column" mat-header-cell *matHeaderCellDef> Manufacturer </th>
+            <td mat-cell *matCellDef="let row"> {{ row.manufacturer }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+            <th class="name-column" mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let row"> {{ row.name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Price">
+            <th class="price-column" mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let row"> {{ row.price }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

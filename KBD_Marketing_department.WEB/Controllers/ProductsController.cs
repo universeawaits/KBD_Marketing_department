@@ -54,5 +54,13 @@ namespace KBD_Marketing_department.WEB.Controllers
         {
             return await productService.GetCategories();
         }
+
+        [HttpGet]
+        [Route("snapshots")]
+        public async Task<ICollection<ProductSnapshot>> GetProductSnapshots([FromQuery] int code)
+        {
+            return await productService.GetProductSnapshots(code);
+        }
+
     }
 }

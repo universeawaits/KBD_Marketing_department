@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { MatTableDataSource } from '@angular/material';
+import { ProductListAddBindService } from '../services/product-list-add-bind.service';
 
 @Component({
   selector: 'categories-list',
@@ -16,7 +17,8 @@ export class CategoriesListComponent implements OnInit {
   categories: string[];
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private productListAddBindService: ProductListAddBindService
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,13 @@ export class CategoriesListComponent implements OnInit {
       categories => {
         this.categories = categories;
         this.dataSource = new MatTableDataSource(this.categories);
+      }
+    );
+    
+    this.productListAddBindService.productAdded.subscribe(
+      product => {
+        this.categories.push(product.category);
+        this.dataSource.data = this.categories;
       }
     )
   }

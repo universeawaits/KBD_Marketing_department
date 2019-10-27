@@ -72,4 +72,8 @@ export class ProductsListComponent implements OnInit {
       }
     );
   }
+
+  getProductSnapshots(code: any) {
+    this.productListHistoryBindService.selectProduct(code);
+  }
 }

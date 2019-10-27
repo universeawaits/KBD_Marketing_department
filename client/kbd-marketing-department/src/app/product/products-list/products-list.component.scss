@@ -1,8 +1,9 @@
 .table-container {
     width: 60%;
-    min-width: 700px;
+    min-width: 750px;
+    height: 600px;
 
-    padding: 15px;
+    padding: 0 15px 0 15px;
 }
 
 table {
@@ -16,22 +17,23 @@ table {
 
 .manufacturer-column {
     width: 40%;
+    min-width: 130px;
 }
 
 .name-column {
     width: 30%;
     min-width: 100px;
+
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-break: break-all;
 }
 
 .category-column {
-    width: 30%;
-    min-width: 100px;
+    width: 130px;
+
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    word-break: break-word;
 }
 
 .price-column {

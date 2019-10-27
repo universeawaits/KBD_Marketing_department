@@ -1,0 +1,52 @@
+.table-container {
+    width: 100%;
+    min-width: 400px;
+    height: 600px;
+
+    overflow: auto;
+    scroll-behavior: smooth;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data, .no-select {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    margin: 0 15px 0 15px;
+}
+
+.mat-header-cell {
+    background-color: white;
+}
+
+.date-column {
+    width: 10%;
+    min-width: 100px;
+}
+
+.manufacturer-column {
+    width: 40%;
+    min-width: 100px;
+}
+
+.name-column {
+    width: 30%;
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.price-column {
+    min-width: 80px;
+}

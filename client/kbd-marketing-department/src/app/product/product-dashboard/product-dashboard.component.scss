@@ -9,6 +9,13 @@
     align-items: center;
 }
 
+.product-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .dashboard * {
     margin: 7px;
 }

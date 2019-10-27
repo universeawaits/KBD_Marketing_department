@@ -8,7 +8,7 @@ export class ProductListHistoryBindService {
 
   constructor() { }
 
-  selectProduct(product: any) {
-    this.productSelected.emit(product);
+  selectProduct(code: any) {
+    this.productSelected.emit(code);
   }
 }

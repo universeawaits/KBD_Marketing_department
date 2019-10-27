@@ -124,7 +124,7 @@ namespace KBD_Marketing_department.WEB.Services
 
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
-                $"select category from {productsTableName}",
+                $"select distinct category from {productsTableName}",
                 Connection
                 ))
             {
@@ -137,6 +137,56 @@ namespace KBD_Marketing_department.WEB.Services
             }
 
             return categories;
+        }
+
+        public async Task<ICollection<ProductSnapshot>> GetProductSnapshots(int code)
+        {
+            ICollection<ProductSnapshot> snapshots = new List<ProductSnapshot>();
+
+            /*string name = "";
+            string manufacturer = "";
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select name, manufacturer from {productsTableName} where code = {code}",
+                Connection
+                ))
+            {
+                reader = await command.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    name = (string)reader[0];
+                    manufacturer = (string)reader[1];
+                }
+            }*/
+
+            // TODO: use join
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select {productsSnapshotsTableName}.* from {productsSnapshotsTableName} " +
+                $"inner join {productsTableName} on {productsTableName}.name = {productsSnapshotsTableName}.name and" +
+                $" {productsTableName}.manufacturer = {productsSnapshotsTableName}.manufacturer " +
+                $"where {productsTableName}.code = {code}",
+                Connection
+                ))
+            {
+                reader = await command.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    snapshots.Add(new ProductSnapshot
+                    {
+                        DateTime = (DateTime)reader[2],
+                        Manufacturer = (string)reader[1],
+                        Name = (string)reader[3],
+                        Price = (int)reader[4]
+                    });
+                }
+            }
+
+            return snapshots;
         }
 
         public void Dispose()
