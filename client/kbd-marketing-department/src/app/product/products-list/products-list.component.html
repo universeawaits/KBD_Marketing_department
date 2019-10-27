@@ -1,5 +1,7 @@
-<div class="table-container mat-elevation-z3">
-    <table mat-table [dataSource]="dataSource" matSort>
+<div class="table-container mat-elevation-z3" [class.no-data-container]="!dataSource.data || (dataSource.data && !dataSource.data.length)">
+    <div *ngIf="dataSource?.data && !dataSource.data.length" class="no-data">There are no products</div>
+
+    <table *ngIf="dataSource.data && dataSource.data.length" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Code">
             <th class="code-column" mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
             <td mat-cell *matCellDef="let row"> {{ row.code }} </td>
@@ -48,5 +50,5 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     
-    <mat-paginator [pageSizeOptions]="[10, 12, 24, 100]"></mat-paginator>
+    <mat-paginator *ngIf="dataSource.data && dataSource.data.length" [pageSizeOptions]="[10, 12, 24, 100]"></mat-paginator>
 </div>

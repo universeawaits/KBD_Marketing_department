@@ -39,6 +39,8 @@ export class ProductsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource(null);
+
     this.productService.getAllProducts().subscribe(
       products => {
         this.products = products;

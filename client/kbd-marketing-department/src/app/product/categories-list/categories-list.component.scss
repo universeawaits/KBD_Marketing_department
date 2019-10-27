@@ -16,3 +16,19 @@ table {
 .mat-header-cell {
     background-color: white;
 }
+
+.no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}

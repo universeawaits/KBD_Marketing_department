@@ -1,4 +1,4 @@
-<div class="table-container mat-elevation-z3">
+<div class="table-container mat-elevation-z3" [class.no-data-container]="!dataSource.data || (dataSource.data && !dataSource.data.length)">
     <div *ngIf="!dataSource.data" class="no-select">Select a product to view it's price changes history</div>
     <div *ngIf="dataSource.data && !dataSource.data.length" class="no-data">This product has no price changes above all time</div>
 

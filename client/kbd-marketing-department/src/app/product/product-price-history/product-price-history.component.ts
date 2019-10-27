@@ -32,7 +32,6 @@ export class ProductPriceHistoryComponent implements OnInit {
         this.productService.getProductSnapshots(code).subscribe(
           snapshots => {
             this.snapshots = snapshots;
-            console.log(snapshots)
             this.dataSource.data = this.snapshots;
           }
         );

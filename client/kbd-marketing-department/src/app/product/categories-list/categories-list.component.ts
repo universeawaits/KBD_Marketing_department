@@ -22,6 +22,8 @@ export class CategoriesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource(null);
+
     this.productService.getCategories().subscribe(
       categories => {
         this.categories = categories;
