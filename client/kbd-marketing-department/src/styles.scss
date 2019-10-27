@@ -238,3 +238,26 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 body {
   min-width: 740px;
 }
+
+h1, h2, h3, h4, h5, h6, span, p {
+  font-family: 'Chakra Petch';
+}
+
+*::-webkit-scrollbar-track {
+	border-radius: 0;
+	background-color: transparent;
+}
+
+*::-webkit-scrollbar {
+	width: 4px;
+	background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	border-radius: 0;
+    background-color: rgba(#278757, 0.5);
+}
+
+.mat-table, .mat-paginator {
+  background-color: transparent;
+}

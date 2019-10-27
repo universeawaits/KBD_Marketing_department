@@ -42,4 +42,8 @@ export class ProductService {
     };
     return this.httpClient.put(this.productsUrl, productBody);
   }
+
+  getCategories(): Observable<string[]> {
+    return this.httpClient.get<string[]>(this.productsUrl + '/categories');
+  }
 }

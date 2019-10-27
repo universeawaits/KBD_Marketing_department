@@ -118,6 +118,27 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
+        public async Task<ICollection<string>> GetCategories()
+        {
+            ICollection<string> categories = new List<string>();
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select category from {productsTableName}",
+                Connection
+                ))
+            {
+                reader = await command.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    categories.Add((string)reader[0]);
+                }
+            }
+
+            return categories;
+        }
+
         public void Dispose()
         {
             Connection.Close();

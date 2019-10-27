@@ -47,5 +47,12 @@ namespace KBD_Marketing_department.WEB.Controllers
                 await productService.CreateProductSnapshot(product);
             }
         }
+
+        [HttpGet]
+        [Route("categories")]
+        public async Task<ICollection<string>> GetCategories()
+        {
+            return await productService.GetCategories();
+        }
     }
 }

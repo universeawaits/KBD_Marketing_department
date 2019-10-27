@@ -10,6 +10,7 @@ import { ProductPriceHistoryComponent } from './product-price-history/product-pr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
 
 
 
@@ -17,7 +18,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
   declarations: [
     CreateProductComponent, 
     ProductsListComponent, 
-    ProductDashboardComponent, ProductPriceHistoryComponent, EditProductComponent
+    ProductDashboardComponent, ProductPriceHistoryComponent, EditProductComponent, CategoriesListComponent
   ],
   imports: [
     CommonModule,
