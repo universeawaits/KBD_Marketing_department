@@ -27,6 +27,7 @@ namespace KBD_Marketing_department.WEB
 
             services.AddCors();
             services.AddTransient(services => new ProductService(conn));
+            services.AddTransient(services => new CustomerService(conn));
             services.AddControllers();
         }
 

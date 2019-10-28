@@ -61,6 +61,5 @@ namespace KBD_Marketing_department.WEB.Controllers
         {
             return await productService.GetProductSnapshots(code);
         }
-
     }
 }

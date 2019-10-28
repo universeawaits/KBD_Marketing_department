@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavModule } from './nav/nav.module';
 import { ProductModule } from './product/product.module';
 import { MatSnackBarModule } from '@angular/material';
+import { CustomerModule } from './customer/customer.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,15 @@ import { MatSnackBarModule } from '@angular/material';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
     AppRoutingModule,
     NavModule,
     ProductModule,
-    MatSnackBarModule
+    CustomerModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

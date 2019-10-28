@@ -16,7 +16,20 @@ namespace KBD_Marketing_department.WEB.Models
         // PK, FK
         public string DocumentNumber { get; set; }
         // FK
-        public string BankNumber { get; set; }
+        public int BankNumber { get; set; }
+    }
+
+    public class CustomerCreate
+    {
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string PersonName { get; set; }
+        public string Adress { get; set; }
+        // PK, FK
+        public string DocumentNumber { get; set; }
+        public string DocumentSeries { get; set; }
+        // FK
+        public int BankNumber { get; set; }
     }
 
     public class Document
@@ -29,7 +42,7 @@ namespace KBD_Marketing_department.WEB.Models
     public class Bank
     {
         // PK
-        public string Number { get; set; }
+        public int Number { get; set; }
         public string Name { get; set; }
     }
 }

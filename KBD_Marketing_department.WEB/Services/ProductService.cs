@@ -143,26 +143,6 @@ namespace KBD_Marketing_department.WEB.Services
         {
             ICollection<ProductSnapshot> snapshots = new List<ProductSnapshot>();
 
-            /*string name = "";
-            string manufacturer = "";
-
-            using (
-                NpgsqlCommand command = new NpgsqlCommand(
-                $"select name, manufacturer from {productsTableName} where code = {code}",
-                Connection
-                ))
-            {
-                reader = await command.ExecuteReaderAsync();
-
-                while (await reader.ReadAsync())
-                {
-                    name = (string)reader[0];
-                    manufacturer = (string)reader[1];
-                }
-            }*/
-
-            // TODO: use join
-
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"select {productsSnapshotsTableName}.* from {productsSnapshotsTableName} " +

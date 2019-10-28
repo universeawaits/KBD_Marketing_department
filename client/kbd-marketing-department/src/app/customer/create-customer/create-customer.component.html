@@ -1,0 +1,44 @@
+<form [formGroup]="createForm" class="create-customer-form">
+    <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type">
+                {{ type }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="createForm.get('type').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="Name">
+        <mat-error *ngIf="createForm.get('name').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="personName" type="text" placeholder="Personal name">
+        <mat-error *ngIf="createForm.get('personName').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="adress" type="text" placeholder="Adress">
+        <mat-error *ngIf="createForm.get('adress').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="documentNumber" type="text" placeholder="Document number">
+        <mat-error *ngIf="createForm.get('documentNumber').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="documentSeries" type="text" placeholder="Document series">
+        <mat-error *ngIf="createForm.get('documentSeries').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Bank</mat-label>
+        <mat-select formControlName="bankNumber">
+            <mat-option *ngFor="let bank of banks" [value]="bank.number">
+                {{ bank.name }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="createForm.get('bankNumber').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <button type="button" mat-icon-button (click)="submit()">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>
