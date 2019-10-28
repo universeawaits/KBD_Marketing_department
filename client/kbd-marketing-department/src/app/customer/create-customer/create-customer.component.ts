@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { CustomerService } from '../services/customer.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CustomerListCreateBindService } from '../services/customer-list-create-bind.service';
 
 @Component({
   selector: 'create-customer',
@@ -19,7 +20,7 @@ export class CreateCustomerComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    //private productListAddBindService: ProductListAddBindService,
+    private customerListCreateBindService: CustomerListCreateBindService,
     private snackBarService: SnackBarService
   ) { }
 
@@ -53,8 +54,9 @@ export class CreateCustomerComponent implements OnInit {
     };
 
     this.customerService.createCustomer(newCustomer).subscribe(
-      product => {
-        //this.productListAddBindService.addProduct(product)
+      customer => {
+        customer.bank = this.banks[customer.bankNumber - 1].name;
+        this.customerListCreateBindService.createCustomer(customer);
       },
       () => {
         this.snackBarService.openSnackBar(

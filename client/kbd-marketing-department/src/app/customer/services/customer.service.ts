@@ -13,7 +13,7 @@ export class CustomerService {
     private httpClient: HttpClient
   ) { }
 
-  createCustomer(customer: any) {
+  createCustomer(customer: any): Observable<any> {
     let newCustomer: any = {
       Type: customer.type,
       Name: customer.name,
@@ -23,8 +23,7 @@ export class CustomerService {
       DocumentSeries: customer.documentSeries,
       BankNumber: customer.bankNumber
     };
-    console.log(newCustomer.DocumentSeries)
-    return this.httpClient.post(this.customersUrl, newCustomer);
+    return this.httpClient.post<any>(this.customersUrl, newCustomer);
   }
 
   getAllBanks(): Observable<any> {
