@@ -31,6 +31,18 @@ namespace KBD_Marketing_department.WEB.Models
         // FK
         public int BankNumber { get; set; }
     }
+    public class CustomerView
+    {
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string PersonName { get; set; }
+        public string Adress { get; set; }
+        // PK, FK
+        public string DocumentNumber { get; set; }
+        public string DocumentSeries { get; set; }
+        // FK
+        public string Bank { get; set; }
+    }
 
     public class Document
     {

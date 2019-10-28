@@ -30,4 +30,12 @@ export class CustomerService {
   getAllBanks(): Observable<any> {
     return this.httpClient.get<any>(this.customersUrl + '/banks');
   }
+
+  getAllCustomers(): Observable<any> {
+    return this.httpClient.get<any>(this.customersUrl);
+  }
+
+  public deleteCustomer(documentNumber: any) {
+    return this.httpClient.delete(this.customersUrl + '?documentNumber=' + documentNumber);
+  }
 }

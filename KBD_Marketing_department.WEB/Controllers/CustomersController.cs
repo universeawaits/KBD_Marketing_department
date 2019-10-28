@@ -21,7 +21,7 @@ namespace KBD_Marketing_department.WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<Customer>> GetAllCustomers()
+        public async Task<ICollection<CustomerView>> GetAllCustomers()
         {
             return await customerService.GetAllCustomers();
         }
@@ -33,9 +33,9 @@ namespace KBD_Marketing_department.WEB.Controllers
         }
 
         [HttpDelete]
-        public async Task DeleteCustomer([FromQuery] int documentNumber)
+        public async Task DeleteCustomer([FromQuery] string documentNumber)
         {
-            //await customerService.DeleteCustomer(documentNumber);
+            await customerService.DeleteCustomer(documentNumber);
         }
 
         [HttpGet]

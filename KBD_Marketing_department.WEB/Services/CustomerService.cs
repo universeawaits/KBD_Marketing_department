@@ -26,13 +26,15 @@ namespace KBD_Marketing_department.WEB.Services
             banksTableName = "banks";
         }
 
-        public async Task<ICollection<Customer>> GetAllCustomers()
+        public async Task<ICollection<CustomerView>> GetAllCustomers()
         {
-            ICollection<Customer> customers = new List<Customer>();
+            ICollection<CustomerView> customers = new List<CustomerView>();
 
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
-                $"select * from {customersTableName}",
+                $"select c.type, c.name, c.person_name, c.adress, d.number, d.series, b.name from {customersTableName} c " +
+                $"inner join {documentsTableName} d on d.number = c.doc_number " +
+                $"inner join {banksTableName} b on b.number = c.bank_number",
                 Connection
                 ))
             {
@@ -40,19 +42,31 @@ namespace KBD_Marketing_department.WEB.Services
 
                 while (await reader.ReadAsync())
                 {
-                    customers.Add(new Customer
+                    customers.Add(new CustomerView
                     {
                         Type = (string)reader[0],
                         Name = (string)reader[1],
                         PersonName = (string)reader[2],
                         Adress = (string)reader[3],
+                        Bank = (string)reader[6],
                         DocumentNumber = (string)reader[4],
-                        BankNumber = (int)reader[5],
+                        DocumentSeries = (string)reader[5]
                     });
                 }
             }
 
             return customers;
+        }
+        public async Task DeleteCustomer(string documentNumber)
+        {
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"delete from {documentsTableName} where number = '{documentNumber}'",
+                Connection
+                ))
+            {
+                await command.ExecuteNonQueryAsync();
+            }
         }
 
         public async Task<ICollection<Bank>> GetAllBanks()
