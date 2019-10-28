@@ -109,7 +109,8 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {customersTableName} (type, name, person_name, adress, doc_number, bank_number) values" +
-                $"('{customer.Type}', '{customer.Name}', '{customer.PersonName}', '{customer.Adress}', '{customer.DocumentNumber}', '{customer.BankNumber}'); ",
+                $"('{customer.Type}', '{customer.Name}', '{customer.PersonName}', " +
+                $"'{customer.Adress}', '{customer.DocumentNumber}', '{customer.BankNumber}'); ",
                 Connection
                 ))
             {
