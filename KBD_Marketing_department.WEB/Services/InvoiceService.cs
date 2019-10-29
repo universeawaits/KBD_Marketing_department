@@ -78,17 +78,17 @@ namespace KBD_Marketing_department.WEB.Services
 
         public async Task<string> CreateInvoiceAsync(Invoice invoice)
         {
-            int productPrice = 0;
+            double productPrice = 0;
 
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
-                $"select code from {productsTableName} where code = {invoice.ProductCode}",
+                $"select price from {productsTableName} where code = {invoice.ProductCode}",
                 Connection
                 ))
             {
                 try
                 {
-                    productPrice = (int)await command.ExecuteScalarAsync();
+                    productPrice = (double)await command.ExecuteScalarAsync();
                 }
                 catch (PostgresException ex)
                 {
@@ -144,17 +144,17 @@ namespace KBD_Marketing_department.WEB.Services
 
         public async Task<string> UpdateInvoice(Invoice invoice)
         {
-            int productPrice = 0;
+            double productPrice = 0;
 
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
-                $"select code from {productsTableName} where code = {invoice.ProductCode}",
+                $"select price from {productsTableName} where code = {invoice.ProductCode}",
                 Connection
                 ))
             {
                 try
                 {
-                    productPrice = (int)await command.ExecuteScalarAsync();
+                    productPrice = (double)await command.ExecuteScalarAsync();
                 }
                 catch (PostgresException ex)
                 {
