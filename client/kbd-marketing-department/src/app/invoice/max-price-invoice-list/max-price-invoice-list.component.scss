@@ -1,0 +1,35 @@
+.table-container {
+    width: 60%;
+    min-width: 700px;
+    height: 750px;
+
+    overflow: auto;
+    scroll-behavior: smooth;
+
+    padding: 0 15px 0 15px;
+}
+
+.no-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+.actions-column {
+    width: 100px;
+}

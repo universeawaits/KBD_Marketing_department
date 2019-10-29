@@ -122,7 +122,7 @@ namespace KBD_Marketing_department.WEB.Services
                 $"update {invoicesTableName} set " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
                 $" total_price = {invoice.TotalPrice.ToString().Replace(",", ".")}, " +
-                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}' " +
+                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime.Date}' " +
                 $"where id = {invoice.Id}",
                 Connection
                 ))
@@ -151,7 +151,7 @@ namespace KBD_Marketing_department.WEB.Services
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"select i.datetime, c.name, i.adress, i.total_price from {invoicesTableName} i " +
                 $"inner join {customersTableName} c on c.doc_number = i.customer_doc " +
-                $"where i.datetime = '{dateTime}' and i.total_price = MAX(total_price)",
+                $"where i.total_price = (select MAX(total_price) from {invoicesTableName} i2 where i2.datetime = '{dateTime.Date}')",
                 Connection
                 ))
             {

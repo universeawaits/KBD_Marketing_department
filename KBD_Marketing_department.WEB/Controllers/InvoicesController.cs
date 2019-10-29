@@ -44,6 +44,13 @@ namespace KBD_Marketing_department.WEB.Controllers
             await invoiceService.DeleteInvoice(id);
         }
 
+        [HttpGet]
+        [Route("maxPrice")]
+        public async Task<ICollection<CustomerInvoice>> GetMaxPriceInvoices([FromQuery] DateTime dateTime)
+        {
+            return await invoiceService.GetMaxPriceInvoices(dateTime);
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateInvoice([FromBody] Invoice invoice)
         {

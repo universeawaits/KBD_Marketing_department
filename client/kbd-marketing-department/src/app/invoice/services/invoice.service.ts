@@ -43,4 +43,8 @@ export class InvoiceService {
     };
     return this.httpClient.put<string>(this.invoicesUrl, invoiceBody);
   }
+
+  getMaxPriceInvoices(dateTime: any) {
+    return this.httpClient.get(this.invoicesUrl + '/maxPrice?dateTime=' + dateTime);
+  }
 }
