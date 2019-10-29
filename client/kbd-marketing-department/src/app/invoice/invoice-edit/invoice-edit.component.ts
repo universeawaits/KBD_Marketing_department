@@ -43,6 +43,7 @@ export class InvoiceEditComponent implements OnInit {
       this.invoice.dateTime);
 
     let newInvoice: any = {
+      id: this.invoice.id,
       dateTime: date,
       adress: this.editForm.get('adress').value,
       customerDocumentNumber: this.editForm.get('customerDoc').value,

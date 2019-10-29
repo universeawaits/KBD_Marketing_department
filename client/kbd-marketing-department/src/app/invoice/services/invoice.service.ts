@@ -34,6 +34,7 @@ export class InvoiceService {
 
   editInvoice(invoice: any): Observable<string> {
     let invoiceBody: any = {
+      Id: invoice.id,
       DateTime: invoice.dateTime,
       Adress: invoice.adress,
       TotalProductCount: invoice.totalProductCount,

@@ -122,7 +122,7 @@ namespace KBD_Marketing_department.WEB.Services
                 $"update {invoicesTableName} set " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
                 $" total_price = {invoice.TotalPrice}, " +
-                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}'" +
+                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}' " +
                 $"where id = {invoice.Id}",
                 Connection
                 ))

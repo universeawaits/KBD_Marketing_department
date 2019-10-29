@@ -1,9 +1,16 @@
 .table-container {
     width: 60%;
     min-width: 750px;
-    height: 600px;
+    height: 750px;
+
+    overflow: auto;
+    scroll-behavior: smooth;
 
     padding: 0 15px 0 15px;
+}
+
+.mat-header-cell {
+    background-color: white;
 }
 
 .no-data-container {
