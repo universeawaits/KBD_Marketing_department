@@ -22,29 +22,29 @@ namespace KBD_Marketing_department.WEB.Controllers
         [HttpGet]
         public async Task<ICollection<Product>> GetAllProducts()
         {
-            return await productService.GetAllProducts();
+            return await productService.GetAllProductsAsync();
         }
 
         [HttpPost]
         public async Task<Product> CreateProduct([FromBody] Product product)
         {
-            return await productService.CreateProduct(product);
+            return await productService.CreateProductAsync(product);
         }
 
         [HttpDelete]
         public async Task DeleteProduct([FromQuery] int code)
         {
-            await productService.DeleteProduct(code);
+            await productService.DeleteProductAsync(code);
         }
 
         [HttpPut]
         public async Task UpdateProduct([FromBody] ProductEdit product)
         {
-            await productService.UpdateProduct(product);
+            await productService.UpdateProductAsync(product);
 
             if (product.Price != product.OldPrice)
             {
-                await productService.CreateProductSnapshot(product);
+                await productService.CreateProductSnapshotAsync(product);
             }
         }
 
@@ -52,14 +52,14 @@ namespace KBD_Marketing_department.WEB.Controllers
         [Route("categories")]
         public async Task<ICollection<string>> GetCategories()
         {
-            return await productService.GetCategories();
+            return await productService.GetCategoriesAsync();
         }
 
         [HttpGet]
         [Route("snapshots")]
         public async Task<ICollection<ProductSnapshot>> GetProductSnapshots([FromQuery] int code)
         {
-            return await productService.GetProductSnapshots(code);
+            return await productService.GetProductSnapshotsAsync(code);
         }
     }
 }

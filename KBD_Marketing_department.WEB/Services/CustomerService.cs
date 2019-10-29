@@ -26,7 +26,7 @@ namespace KBD_Marketing_department.WEB.Services
             banksTableName = "banks";
         }
 
-        public async Task<ICollection<CustomerView>> GetAllCustomers()
+        public async Task<ICollection<CustomerView>> GetAllCustomersAsync()
         {
             ICollection<CustomerView> customers = new List<CustomerView>();
 
@@ -57,7 +57,7 @@ namespace KBD_Marketing_department.WEB.Services
 
             return customers;
         }
-        public async Task DeleteCustomer(string documentNumber)
+        public async Task DeleteCustomerAsync(string documentNumber)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -69,7 +69,7 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
-        public async Task<ICollection<Bank>> GetAllBanks()
+        public async Task<ICollection<Bank>> GetAllBanksAsync()
         {
             ICollection<Bank> banks = new List<Bank>();
 
@@ -94,7 +94,7 @@ namespace KBD_Marketing_department.WEB.Services
             return banks;
         }
 
-        public async Task<CustomerCreate> CreateCustomer(CustomerCreate customer)
+        public async Task<CustomerCreate> CreateCustomerAsync(CustomerCreate customer)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(

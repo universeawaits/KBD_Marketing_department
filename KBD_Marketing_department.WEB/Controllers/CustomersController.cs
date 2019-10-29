@@ -23,26 +23,26 @@ namespace KBD_Marketing_department.WEB.Controllers
         [HttpGet]
         public async Task<ICollection<CustomerView>> GetAllCustomers()
         {
-            return await customerService.GetAllCustomers();
+            return await customerService.GetAllCustomersAsync();
         }
 
         [HttpPost]
         public async Task<CustomerCreate> CreateCustomer([FromBody] CustomerCreate customer)
         {
-            return await customerService.CreateCustomer(customer);
+            return await customerService.CreateCustomerAsync(customer);
         }
 
         [HttpDelete]
         public async Task DeleteCustomer([FromQuery] string documentNumber)
         {
-            await customerService.DeleteCustomer(documentNumber);
+            await customerService.DeleteCustomerAsync(documentNumber);
         }
 
         [HttpGet]
         [Route("banks")]
         public async Task<ICollection<Bank>> GetAllBanks()
         {
-            return await customerService.GetAllBanks();
+            return await customerService.GetAllBanksAsync();
         }
     }
 }

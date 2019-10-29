@@ -24,7 +24,7 @@ namespace KBD_Marketing_department.WEB.Services
             productsSnapshotsTableName = "products_snapshots";
         }
 
-        public async Task<ICollection<Product>> GetAllProducts()
+        public async Task<ICollection<Product>> GetAllProductsAsync()
         {
             ICollection<Product> products = new List<Product>();
 
@@ -52,7 +52,7 @@ namespace KBD_Marketing_department.WEB.Services
             return products;
         }
 
-        public async Task<Product> CreateProduct(Product product)
+        public async Task<Product> CreateProductAsync(Product product)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -79,7 +79,7 @@ namespace KBD_Marketing_department.WEB.Services
             return product;
         }
 
-        public async Task DeleteProduct(int code)
+        public async Task DeleteProductAsync(int code)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -91,7 +91,7 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
-        public async Task UpdateProduct(ProductEdit product)
+        public async Task UpdateProductAsync(ProductEdit product)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -105,7 +105,7 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
-        public async Task CreateProductSnapshot(ProductEdit product)
+        public async Task CreateProductSnapshotAsync(ProductEdit product)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -118,7 +118,7 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
-        public async Task<ICollection<string>> GetCategories()
+        public async Task<ICollection<string>> GetCategoriesAsync()
         {
             ICollection<string> categories = new List<string>();
 
@@ -139,7 +139,7 @@ namespace KBD_Marketing_department.WEB.Services
             return categories;
         }
 
-        public async Task<ICollection<ProductSnapshot>> GetProductSnapshots(int code)
+        public async Task<ICollection<ProductSnapshot>> GetProductSnapshotsAsync(int code)
         {
             ICollection<ProductSnapshot> snapshots = new List<ProductSnapshot>();
 
