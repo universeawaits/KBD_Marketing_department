@@ -33,9 +33,11 @@ export class CategoriesListComponent implements OnInit {
     
     this.productListAddBindService.productAdded.subscribe(
       product => {
-        this.categories.push(product.category);
-        this.dataSource.data = this.categories;
+        if (!this.categories.includes(product.category)) {
+          this.categories.push(product.category);
+          this.dataSource.data = this.categories;
+        }
       }
-    )
+    );
   }
 }

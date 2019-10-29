@@ -13,6 +13,7 @@ namespace KBD_Marketing_department.WEB.Services
         private NpgsqlDataReader reader;
 
         private string invoicesTableName;
+        private string customersTableName;
 
         private IDictionary<string, string> exceptionMessages;
 
@@ -22,6 +23,7 @@ namespace KBD_Marketing_department.WEB.Services
             Connection.Open();
 
             invoicesTableName = "invoices";
+            customersTableName = "customers";
 
             exceptionMessages = new Dictionary<string, string>
             {
@@ -44,14 +46,12 @@ namespace KBD_Marketing_department.WEB.Services
 
                 while (await reader.ReadAsync())
                 {
-                    var t = (DateTime)reader[5];
-
                     invoices.Add(new Invoice
                     {
                         Id = (int)reader[0],
                         CustomerDocumentNumber = (string)reader[1],
                         Adress = (string)reader[2],
-                        TotalPrice = (int)reader[3],
+                        TotalPrice = (double)reader[3],
                         TotalProductCount = (int)reader[4],
                         DateTime = (DateTime)reader[5]
                     });
@@ -80,7 +80,7 @@ namespace KBD_Marketing_department.WEB.Services
                 $"insert into {invoicesTableName} " +
                 $"(customer_doc, adress, total_price, total_product_count, datetime) values" +
                 $"('{invoice.CustomerDocumentNumber}', '{invoice.Adress}', " +
-                $"{invoice.TotalPrice}, {invoice.TotalProductCount}, '{invoice.DateTime.Date}'); ",
+                $"{invoice.TotalPrice.ToString().Replace(",", ".")}, {invoice.TotalProductCount}, '{invoice.DateTime.Date}'); ",
                 Connection
                 ))
             {
@@ -102,7 +102,7 @@ namespace KBD_Marketing_department.WEB.Services
                 $"select id from {invoicesTableName} where " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}' and " +
                 $"adress = '{invoice.Adress}' and " +
-                $"total_price = {invoice.TotalPrice} and " +
+                $"total_price = {invoice.TotalPrice.ToString().Replace(",", ".")} and " +
                 $"total_product_count = {invoice.TotalProductCount} and " +
                 $"datetime = '{invoice.DateTime.Date}'",
                 Connection
@@ -121,7 +121,7 @@ namespace KBD_Marketing_department.WEB.Services
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"update {invoicesTableName} set " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
-                $" total_price = {invoice.TotalPrice}, " +
+                $" total_price = {invoice.TotalPrice.ToString().Replace(",", ".")}, " +
                 $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}' " +
                 $"where id = {invoice.Id}",
                 Connection
@@ -141,6 +141,35 @@ namespace KBD_Marketing_department.WEB.Services
             }
 
             return null;
+        }
+
+        public async Task<ICollection<CustomerInvoice>> GetMaxPriceInvoices(DateTime dateTime)
+        {
+            ICollection<CustomerInvoice> maxInvoices = new List<CustomerInvoice>();
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select i.datetime, c.name, i.adress, i.total_price from {invoicesTableName} i " +
+                $"inner join {customersTableName} c on c.doc_number = i.customer_doc " +
+                $"where i.datetime = '{dateTime}' and i.total_price = MAX(total_price)",
+                Connection
+                ))
+            {
+                reader = await command.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    maxInvoices.Add(new CustomerInvoice
+                    {
+                        DateTime = (DateTime)reader[0],
+                        CustomerName = (string)reader[1],
+                        Adress = (string)reader[2],
+                        TotalPrice = (double)reader[3]
+                    });
+                }
+            }
+
+            return maxInvoices;
         }
 
         public void Dispose()

@@ -10,14 +10,16 @@ import { MatTableModule, MatPaginatorModule, MatIconModule,
   MatButtonModule, MatDialogModule, MatFormFieldModule, 
   MatInputModule, MatListModule, MatDatepickerModule, 
   MatNativeDateModule } from '@angular/material';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { MaxPriceInvoiceListComponent } from './max-price-invoice-list/max-price-invoice-list.component'
 
 @NgModule({
   declarations: [
     InvoiceListComponent,
     InvoiceCreateComponent,
     InvoiceEditComponent,
-    InvoiceDashboardComponent
+    InvoiceDashboardComponent,
+    MaxPriceInvoiceListComponent
   ],
   imports: [
     CommonModule,

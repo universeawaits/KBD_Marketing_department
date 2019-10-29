@@ -44,7 +44,7 @@ namespace KBD_Marketing_department.WEB.Services
                         Manufacturer = (string)reader[1],
                         Name = (string)reader[2],
                         Category = (string)reader[3],
-                        Price = (int)reader[4]
+                        Price = (double)reader[4]
                     });
                 }
             }
@@ -57,7 +57,7 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {productsTableName} (manufacturer, name, category, price) values" +
-                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', {product.Price}); ",
+                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', {product.Price.ToString().Replace(",", ".")}); ",
                 Connection
                 ))
             {
@@ -96,7 +96,7 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"update {productsTableName} set " +
-                $"name = '{product.Name}', category = '{product.Category}', price = {product.Price}" +
+                $"name = '{product.Name}', category = '{product.Category}', price = '{product.Price.ToString().Replace(",", ".")}'" +
                 $"where code = {product.Code}",
                 Connection
                 ))
@@ -110,7 +110,7 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {productsSnapshotsTableName} (manufacturer, datetime, name, price) values" +
-                $"('{product.Manufacturer}', '{DateTime.Now}', '{product.Name}', {product.Price}); ",
+                $"('{product.Manufacturer}', '{DateTime.Now}', '{product.Name}', {product.Price.ToString().Replace(",", ".")}); ",
                 Connection
                 ))
             {
@@ -161,7 +161,7 @@ namespace KBD_Marketing_department.WEB.Services
                         DateTime = (DateTime)reader[2],
                         Manufacturer = (string)reader[1],
                         Name = (string)reader[3],
-                        Price = (int)reader[4]
+                        Price = (double)reader[4]
                     });
                 }
             }

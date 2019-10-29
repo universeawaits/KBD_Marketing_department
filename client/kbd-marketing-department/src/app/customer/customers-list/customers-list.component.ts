@@ -43,7 +43,7 @@ export class CustomersListComponent implements OnInit {
         this.customers.push(customer);
         this.dataSource.data = this.customers;
       }
-    )
+    );
   }
 
   deleteCustomer(documentNumber: any) {

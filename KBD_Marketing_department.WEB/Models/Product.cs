@@ -12,7 +12,7 @@ namespace KBD_Marketing_department.WEB.Models
         public string Manufacturer { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 
     public class ProductSnapshot
@@ -22,7 +22,7 @@ namespace KBD_Marketing_department.WEB.Models
         public string Manufacturer { get; set; }
         public string Name { get; set; }
         public DateTime DateTime { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 
     public class ProductEdit
@@ -32,7 +32,7 @@ namespace KBD_Marketing_department.WEB.Models
         public string Manufacturer { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
-        public int Price { get; set; }
-        public int OldPrice { get; set; }
+        public double Price { get; set; }
+        public double OldPrice { get; set; }
     }
 }
