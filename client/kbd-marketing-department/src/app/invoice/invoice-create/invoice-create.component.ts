@@ -39,7 +39,7 @@ export class InvoiceCreateComponent implements OnInit {
     let _adress = _region_segment + ', ' + this.createForm.get('country').value;
 
     let newInvoice: any = {
-      dateTime: this.datepipe.transform(new Date(this.createForm.get('datetime').value), 'yyyy-MM-dd hh:mm:ss'),
+      dateTime: new Date(this.datepipe.transform(new Date(this.createForm.get('datetime').value), 'yyyy-MM-dd hh:mm:ss')),
       adress: _adress,
       customerDocumentNumber: this.createForm.get('customerDoc').value,
       totalPrice: this.createForm.get('totalPrice').value,
@@ -50,10 +50,10 @@ export class InvoiceCreateComponent implements OnInit {
       () => {
         this.invoiceListCreateBindService.createInvoice(newInvoice);
       },
-      error => {
-        this.snackBarService.openSnackBar(
-          'Customer doc and date must be unique per invoice record'
-          );
+      response => {
+        if (response.error) {
+          this.snackBarService.openSnackBar(response.error);
+        }
       }
     );
   }

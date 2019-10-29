@@ -14,12 +14,19 @@ namespace KBD_Marketing_department.WEB.Services
 
         private string invoicesTableName;
 
+        private IDictionary<string, string> exceptionMessages;
+
         public InvoiceService(string connString)
         {
             Connection = new NpgsqlConnection(connString);
             Connection.Open();
 
             invoicesTableName = "invoices";
+
+            exceptionMessages = new Dictionary<string, string>
+            {
+                { "23503", "No customer with this document number was found" }
+            };
         }
 
         public async Task<ICollection<Invoice>> GetAllInvoicesAsync()
@@ -82,14 +89,17 @@ namespace KBD_Marketing_department.WEB.Services
                 }
                 catch (PostgresException ex)
                 {
-                    return ex.SqlState;
+                    if (exceptionMessages.TryGetValue(ex.SqlState, out string message))
+                    {
+                        return message;
+                    }
                 }
             }
 
             return null;
         }
 
-        public async Task UpdateInvoice(Invoice invoice)
+        public async Task<string> UpdateInvoice(Invoice invoice)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
@@ -101,8 +111,20 @@ namespace KBD_Marketing_department.WEB.Services
                 Connection
                 ))
             {
-                await command.ExecuteNonQueryAsync();
+                try
+                {
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (PostgresException ex)
+                {
+                    if (exceptionMessages.TryGetValue(ex.SqlState, out string message))
+                    {
+                        return message;
+                    }
+                }
             }
+
+            return null;
         }
 
         public void Dispose()

@@ -26,9 +26,16 @@ namespace KBD_Marketing_department.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task CreateInvoice([FromBody] Invoice invoice)
+        public async Task<IActionResult> CreateInvoice([FromBody] Invoice invoice)
         {
-            await invoiceService.CreateInvoiceAsync(invoice);
+            string error = await invoiceService.CreateInvoiceAsync(invoice);
+
+            if (error != null)
+            {
+                return BadRequest(error);
+            }
+
+            return Ok();
         }
 
         [HttpDelete]
@@ -38,9 +45,9 @@ namespace KBD_Marketing_department.WEB.Controllers
         }
 
         [HttpPut]
-        public async Task UpdateInvoice([FromBody] Invoice invoice)
+        public async Task<string> UpdateInvoice([FromBody] Invoice invoice)
         {
-            await invoiceService.UpdateInvoice(invoice);
+            return await invoiceService.UpdateInvoice(invoice);
         }
     }
 }

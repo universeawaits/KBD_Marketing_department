@@ -32,7 +32,7 @@ export class InvoiceService {
     return this.httpClient.delete(this.invoicesUrl + '?id=' + id);
   }
 
-  editInvoice(product: any) {
+  editInvoice(product: any): Observable<string> {
     let productBody: any = {
       Code: product.code,
       Name: product.name,
@@ -41,6 +41,6 @@ export class InvoiceService {
       Price: product.price,
       OldPrice: product.oldPrice
     };
-    return this.httpClient.put(this.invoicesUrl, productBody);
+    return this.httpClient.put<string>(this.invoicesUrl, productBody);
   }
 }
