@@ -1,0 +1,14 @@
+.create-invoice-form {
+    width: 250px;
+    height: 490px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+mat-form-field {
+    width: 95%;
+}

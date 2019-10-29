@@ -10,6 +10,7 @@ import { MatTableModule, MatPaginatorModule, MatIconModule,
   MatButtonModule, MatDialogModule, MatFormFieldModule, 
   MatInputModule, MatListModule, MatDatepickerModule, 
   MatNativeDateModule } from '@angular/material';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import { MatTableModule, MatPaginatorModule, MatIconModule,
     MatNativeDateModule 
   ],
   entryComponents: [
-    InvoiceCreateComponent
+    InvoiceCreateComponent,
+    InvoiceEditComponent
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class InvoiceModule { }

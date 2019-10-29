@@ -1,1 +1,39 @@
-<p>invoice-create works!</p>
+<form [formGroup]="createForm" class="create-invoice-form">
+    <mat-form-field floatLabel="never">
+        <input matInput [matDatepicker]="picker" required placeholder="Date"
+            (dateInput)="changeDate($event)" (dateChange)="changeDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="city" type="text" placeholder="City">
+        <mat-error *ngIf="createForm.get('city').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="region" type="text" placeholder="Region">
+        <mat-error *ngIf="createForm.get('region').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="country" type="text" placeholder="Country">
+        <mat-error *ngIf="createForm.get('country').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="customerDoc" type="text" placeholder="Customer doc number">
+        <mat-error *ngIf="createForm.get('customerDoc').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput min="0" formControlName="totalPrice" type="number" placeholder="Total price">
+        <mat-error *ngIf="createForm.get('totalPrice').errors?.required">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput min="0" formControlName="totalCount" type="number" placeholder="Total amount">
+        <mat-error *ngIf="createForm.get('totalCount').errors?.required">Required</mat-error>
+    </mat-form-field>
+
+    <button type="button" mat-icon-button [disabled]="createForm.invalid" (click)="submit()">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>

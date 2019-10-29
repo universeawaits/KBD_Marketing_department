@@ -52,6 +52,6 @@ export class ProductPriceHistoryComponent implements OnInit {
       this.dataSource.data = this.snapshots.filter(
         sn => Date.parse(sn.dateTime) <= event.value.valueOf()
         );   
-    } 
+    }
   }
 }

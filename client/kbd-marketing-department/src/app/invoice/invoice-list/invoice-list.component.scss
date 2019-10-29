@@ -1,0 +1,61 @@
+.table-container {
+    width: 60%;
+    min-width: 1000px;
+    height: 600px;
+
+    padding: 0 15px 0 15px;
+}
+
+.no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+.code-column {
+    width: 10%;
+    min-width: 80px;
+}
+
+.manufacturer-column {
+    width: 40%;
+    min-width: 130px;
+}
+
+.name-column {
+    width: 30%;
+    min-width: 100px;
+
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.category-column {
+    width: 130px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.price-column {
+    min-width: 80px;
+}
+
+.actions-column {
+    min-width: 150px;
+}

@@ -10,7 +10,7 @@ namespace KBD_Marketing_department.WEB.Models
         // PK
         public int Id { get; set; }
         // FK
-        public string CustomerDocumnetNumber { get; set; }
+        public string CustomerDocumentNumber { get; set; }
         public DateTime DateTime { get; set; }
         public int TotalPrice { get; set; }
         public int TotalProductCount { get; set; }

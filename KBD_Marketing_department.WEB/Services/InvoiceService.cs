@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KBD_Marketing_department.WEB.Services
 {
-    public class InvoiceService
+    public class InvoiceService : IDisposable
     {
         public NpgsqlConnection Connection { get; set; }
         private NpgsqlDataReader reader;
@@ -36,10 +36,12 @@ namespace KBD_Marketing_department.WEB.Services
 
                 while (await reader.ReadAsync())
                 {
+                    var t = (DateTime)reader[5];
+
                     invoices.Add(new Invoice
                     {
                         Id = (int)reader[0],
-                        CustomerDocumnetNumber = (string)reader[1],
+                        CustomerDocumentNumber = (string)reader[1],
                         Adress = (string)reader[2],
                         TotalPrice = (int)reader[3],
                         TotalProductCount = (int)reader[4],
@@ -63,21 +65,28 @@ namespace KBD_Marketing_department.WEB.Services
             }
         }
 
-        public async Task<Invoice> CreateInvoiceAsync(Invoice invoice)
+        public async Task<string> CreateInvoiceAsync(Invoice invoice)
         {
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {invoicesTableName} " +
                 $"(customer_doc, adress, total_price, total_product_count, datetime) values" +
-                $"('{invoice.CustomerDocumnetNumber}', '{invoice.Adress}', " +
-                $"{invoice.TotalPrice}, {invoice.TotalProductCount}, '{invoice.DateTime}'); ",
+                $"('{invoice.CustomerDocumentNumber}', '{invoice.Adress}', " +
+                $"{invoice.TotalPrice}, {invoice.TotalProductCount}, '{invoice.DateTime.Date}'); ",
                 Connection
                 ))
             {
-                await command.ExecuteNonQueryAsync();
+                try
+                {
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (PostgresException ex)
+                {
+                    return ex.SqlState;
+                }
             }
 
-            return invoice;
+            return null;
         }
 
         public async Task UpdateInvoice(Invoice invoice)
@@ -85,7 +94,7 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"update {invoicesTableName} set " +
-                $"customer_doc = '{invoice.CustomerDocumnetNumber}', adress = '{invoice.Adress}'," +
+                $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
                 $" total_price = {invoice.TotalPrice}, " +
                 $"total_product_price = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}'" +
                 $"where id = {invoice.Id}",
@@ -94,6 +103,12 @@ namespace KBD_Marketing_department.WEB.Services
             {
                 await command.ExecuteNonQueryAsync();
             }
+        }
+
+        public void Dispose()
+        {
+            Connection.Close();
+            Connection.DisposeAsync();
         }
     }
 }

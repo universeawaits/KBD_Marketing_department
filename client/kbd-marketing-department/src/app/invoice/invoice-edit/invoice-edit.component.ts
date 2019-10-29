@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { InvoiceListEditBindService } from '../services/invoice-list-edit-bind.service';
 
 @Component({
-  selector: 'app-invoice-edit',
+  selector: 'invoice-edit',
   templateUrl: './invoice-edit.component.html',
   styleUrls: ['./invoice-edit.component.scss']
 })
 export class InvoiceEditComponent implements OnInit {
+  invoice: any;
 
-  constructor() { }
+  constructor(
+    private invoiceListEditBindService: InvoiceListEditBindService
+  ) { }
 
   ngOnInit() {
+    this.invoiceListEditBindService.invoiceSelected.subscribe(
+      invoice => {
+        this.invoice = invoice;
+      }
+    );
   }
-
 }

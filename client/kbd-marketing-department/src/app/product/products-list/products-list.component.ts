@@ -26,7 +26,6 @@ export class ProductsListComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   products: any[];
 
@@ -46,7 +45,6 @@ export class ProductsListComponent implements OnInit {
         this.products = products;
         this.dataSource = new MatTableDataSource(this.products);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
       }
     );
 

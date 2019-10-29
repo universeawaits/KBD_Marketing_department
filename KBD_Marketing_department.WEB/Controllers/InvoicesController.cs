@@ -26,9 +26,9 @@ namespace KBD_Marketing_department.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<Invoice> CreateInvoice([FromBody] Invoice invoice)
+        public async Task CreateInvoice([FromBody] Invoice invoice)
         {
-            return await invoiceService.CreateInvoiceAsync(invoice);
+            await invoiceService.CreateInvoiceAsync(invoice);
         }
 
         [HttpDelete]

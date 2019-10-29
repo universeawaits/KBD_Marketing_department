@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KBD_Marketing_department.WEB.Services
 {
-    public class CustomerService
+    public class CustomerService : IDisposable
     {
         public NpgsqlConnection Connection { get; set; }
         private NpgsqlDataReader reader;
@@ -118,6 +118,12 @@ namespace KBD_Marketing_department.WEB.Services
             }
 
             return customer;
+        }
+
+        public void Dispose()
+        {
+            Connection.Close();
+            Connection.DisposeAsync();
         }
     }
 }

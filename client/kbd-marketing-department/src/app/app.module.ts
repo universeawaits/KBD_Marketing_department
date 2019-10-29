@@ -8,6 +8,7 @@ import { NavModule } from './nav/nav.module';
 import { ProductModule } from './product/product.module';
 import { MatSnackBarModule } from '@angular/material';
 import { CustomerModule } from './customer/customer.module';
+import { InvoiceModule } from './invoice/invoice.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CustomerModule } from './customer/customer.module';
     AppRoutingModule,
     NavModule,
     ProductModule,
+    InvoiceModule,
     CustomerModule
   ],
   providers: [],
