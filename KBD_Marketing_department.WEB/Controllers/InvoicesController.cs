@@ -35,19 +35,26 @@ namespace KBD_Marketing_department.WEB.Controllers
                 return BadRequest(error);
             }
 
-            return Ok();
+            return Ok(invoice);
         }
 
         [HttpDelete]
-        public async Task DeleteProduct([FromQuery] int id)
+        public async Task DeleteInvoice([FromQuery] int id)
         {
             await invoiceService.DeleteInvoice(id);
         }
 
         [HttpPut]
-        public async Task<string> UpdateInvoice([FromBody] Invoice invoice)
+        public async Task<IActionResult> UpdateInvoice([FromBody] Invoice invoice)
         {
-            return await invoiceService.UpdateInvoice(invoice);
+            string error = await invoiceService.UpdateInvoice(invoice);
+
+            if (error != null)
+            {
+                return BadRequest(error);
+            }
+
+            return Ok(invoice);
         }
     }
 }

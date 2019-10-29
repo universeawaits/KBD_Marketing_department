@@ -4,6 +4,7 @@ import { EditProductComponent } from 'src/app/product/edit-product/edit-product.
 import { InvoiceService } from '../services/invoice.service';
 import { InvoiceListEditBindService } from '../services/invoice-list-edit-bind.service';
 import { InvoiceListCreateBindService } from '../services/invoice-list-create-bind.service';
+import { InvoiceEditComponent } from '../invoice-edit/invoice-edit.component';
 
 @Component({
   selector: 'invoice-list',
@@ -61,7 +62,7 @@ export class InvoiceListComponent implements OnInit {
   }
 
   editInvoice(invoice: any) {
-    this.editInvoiceDialog.open(EditProductComponent).afterOpened().subscribe(
+    this.editInvoiceDialog.open(InvoiceEditComponent).afterOpened().subscribe(
       () => {
         this.invoiceListEditBindService.selectInvoice(invoice);
       }

@@ -25,7 +25,8 @@ namespace KBD_Marketing_department.WEB.Services
 
             exceptionMessages = new Dictionary<string, string>
             {
-                { "23503", "No customer with this document number was found" }
+                { "23503", "No customer with this document number was found" },
+                { "23505", "Set of all properties remain (except ID) must be unique per invoice" }
             };
         }
 
@@ -96,6 +97,21 @@ namespace KBD_Marketing_department.WEB.Services
                 }
             }
 
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select id from {invoicesTableName} where " +
+                $"customer_doc = '{invoice.CustomerDocumentNumber}' and " +
+                $"adress = '{invoice.Adress}' and " +
+                $"total_price = {invoice.TotalPrice} and " +
+                $"total_product_count = {invoice.TotalProductCount} and " +
+                $"datetime = '{invoice.DateTime.Date}'",
+                Connection
+                ))
+            {
+                object id = await command.ExecuteScalarAsync();
+                invoice.Id = (int)id;
+            }
+
             return null;
         }
 
@@ -106,7 +122,7 @@ namespace KBD_Marketing_department.WEB.Services
                 $"update {invoicesTableName} set " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
                 $" total_price = {invoice.TotalPrice}, " +
-                $"total_product_price = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}'" +
+                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime}'" +
                 $"where id = {invoice.Id}",
                 Connection
                 ))

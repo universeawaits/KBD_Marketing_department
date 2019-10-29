@@ -32,15 +32,14 @@ export class InvoiceService {
     return this.httpClient.delete(this.invoicesUrl + '?id=' + id);
   }
 
-  editInvoice(product: any): Observable<string> {
-    let productBody: any = {
-      Code: product.code,
-      Name: product.name,
-      Manufacturer: product.manufacturer,
-      Category: product.category,
-      Price: product.price,
-      OldPrice: product.oldPrice
+  editInvoice(invoice: any): Observable<string> {
+    let invoiceBody: any = {
+      DateTime: invoice.dateTime,
+      Adress: invoice.adress,
+      TotalProductCount: invoice.totalProductCount,
+      TotalPrice: invoice.totalPrice,
+      CustomerDocumentNumber: invoice.customerDocumentNumber
     };
-    return this.httpClient.put<string>(this.invoicesUrl, productBody);
+    return this.httpClient.put<string>(this.invoicesUrl, invoiceBody);
   }
 }

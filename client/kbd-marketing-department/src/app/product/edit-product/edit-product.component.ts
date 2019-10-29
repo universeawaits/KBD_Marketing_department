@@ -5,7 +5,7 @@ import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
-  selector: 'app-edit-product',
+  selector: 'edit-product',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss']
 })

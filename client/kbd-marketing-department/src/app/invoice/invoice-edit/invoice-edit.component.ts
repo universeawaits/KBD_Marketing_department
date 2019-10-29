@@ -25,29 +25,26 @@ export class InvoiceEditComponent implements OnInit {
     this.invoiceListEditBindService.invoiceSelected.subscribe(
       invoice => {
         this.invoice = invoice;
+
+        this.editForm = new FormGroup({
+          'datetime': new FormControl('', Validators.required),
+          'adress': new FormControl(invoice.adress, Validators.required),
+          'customerDoc': new FormControl(invoice.customerDocumentNumber, Validators.required),
+          'totalPrice': new FormControl(invoice.totalPrice, Validators.required),
+          'totalCount': new FormControl(invoice.totalProductCount, Validators.required)
+        });
       }
     );
-
-    this.editForm = new FormGroup({
-      'datetime': new FormControl('', Validators.required),
-      'city': new FormControl('', Validators.required),
-      'region': new FormControl(''),
-      'country': new FormControl('', Validators.required),
-      'customerDoc': new FormControl('', Validators.required),
-      'totalPrice': new FormControl('', Validators.required),
-      'totalCount': new FormControl('', Validators.required)
-    });
   }
 
   submit() {
-    let _region_segment = this.editForm.get('region').value ? 
-      this.editForm.get('city').value + ', ' + this.editForm.get('region').value : 
-      this.editForm.get('city').value;
-    let _adress = _region_segment + ', ' + this.editForm.get('country').value;
+    let date = new Date(this.editForm.get('datetime').value ? 
+      this.datepipe.transform(new Date(this.editForm.get('datetime').value), 'yyyy-MM-dd hh:mm:ss') : 
+      this.invoice.dateTime);
 
     let newInvoice: any = {
-      dateTime: this.datepipe.transform(new Date(this.editForm.get('datetime').value), 'yyyy-MM-dd hh:mm:ss'),
-      adress: _adress,
+      dateTime: date,
+      adress: this.editForm.get('adress').value,
       customerDocumentNumber: this.editForm.get('customerDoc').value,
       totalPrice: this.editForm.get('totalPrice').value,
       totalProductCount: this.editForm.get('totalCount').value,

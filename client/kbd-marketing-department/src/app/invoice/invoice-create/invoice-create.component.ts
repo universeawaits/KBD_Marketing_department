@@ -47,8 +47,8 @@ export class InvoiceCreateComponent implements OnInit {
     };
 
     this.invoiceService.createInvoice(newInvoice).subscribe(
-      () => {
-        this.invoiceListCreateBindService.createInvoice(newInvoice);
+      invoice => {
+        this.invoiceListCreateBindService.createInvoice(invoice);
       },
       response => {
         if (response.error) {

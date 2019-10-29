@@ -1,4 +1,4 @@
-<form [formGroup]="editForm" class="create-invoice-form">
+<form *ngIf="editForm" [formGroup]="editForm" class="edit-invoice-form">
     <mat-form-field floatLabel="never">
         <input matInput [matDatepicker]="picker" required placeholder="Date"
             (dateInput)="changeDate($event)" (dateChange)="changeDate($event)">
@@ -7,16 +7,8 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput formControlName="city" type="text" placeholder="City">
-        <mat-error *ngIf="editForm.get('city').errors?.required">Required</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput formControlName="region" type="text" placeholder="Region">
-        <mat-error *ngIf="editForm.get('region').errors?.required">Required</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput formControlName="country" type="text" placeholder="Country">
-        <mat-error *ngIf="editForm.get('country').errors?.required">Required</mat-error>
+        <input matInput formControlName="adress" type="text" placeholder="Adress">
+        <mat-error *ngIf="editForm.get('adress').errors?.required">Required</mat-error>
     </mat-form-field>
 
     <mat-form-field>
