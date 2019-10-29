@@ -57,7 +57,8 @@ namespace KBD_Marketing_department.WEB.Services
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {productsTableName} (manufacturer, name, category, price) values" +
-                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', {product.Price.ToString().Replace(",", ".")}); ",
+                $"('{product.Manufacturer}', '{product.Name}', '{product.Category}', " +
+                $"{product.Price.ToString().Replace(",", ".")}); ",
                 Connection
                 ))
             {

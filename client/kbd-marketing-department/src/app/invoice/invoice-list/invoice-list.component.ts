@@ -17,6 +17,7 @@ export class InvoiceListComponent implements OnInit {
     'Customer doc',
     'Adress',
     'Date',
+    'Product code',
     'Price',
     'Amount',
     'Actions'

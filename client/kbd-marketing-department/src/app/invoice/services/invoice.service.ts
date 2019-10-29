@@ -22,7 +22,7 @@ export class InvoiceService {
       DateTime: invoice.dateTime,
       Adress: invoice.adress,
       TotalProductCount: invoice.totalProductCount,
-      TotalPrice: invoice.totalPrice,
+      ProductCode: invoice.productCode,
       CustomerDocumentNumber: invoice.customerDocumentNumber
     };
     return this.httpClient.post<any>(this.invoicesUrl, invoiceBody);
@@ -38,7 +38,7 @@ export class InvoiceService {
       DateTime: invoice.dateTime,
       Adress: invoice.adress,
       TotalProductCount: invoice.totalProductCount,
-      TotalPrice: invoice.totalPrice,
+      ProductCode: invoice.productCode,
       CustomerDocumentNumber: invoice.customerDocumentNumber
     };
     return this.httpClient.put<string>(this.invoicesUrl, invoiceBody);

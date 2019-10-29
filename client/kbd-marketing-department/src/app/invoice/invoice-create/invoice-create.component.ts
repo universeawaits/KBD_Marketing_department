@@ -27,7 +27,7 @@ export class InvoiceCreateComponent implements OnInit {
       'region': new FormControl(''),
       'country': new FormControl('', Validators.required),
       'customerDoc': new FormControl('', Validators.required),
-      'totalPrice': new FormControl('', Validators.required),
+      'productCode': new FormControl('', Validators.required),
       'totalCount': new FormControl('', Validators.required)
     });
   }
@@ -42,7 +42,7 @@ export class InvoiceCreateComponent implements OnInit {
       dateTime: new Date(this.datepipe.transform(new Date(this.createForm.get('datetime').value), 'yyyy-MM-dd hh:mm:ss')),
       adress: _adress,
       customerDocumentNumber: this.createForm.get('customerDoc').value,
-      totalPrice: this.createForm.get('totalPrice').value,
+      productCode: this.createForm.get('productCode').value,
       totalProductCount: this.createForm.get('totalCount').value,
     };
 

@@ -21,6 +21,11 @@
             <th mat-header-cell *matHeaderCellDef> Date </th>
             <td mat-cell *matCellDef="let row"> {{ row.dateTime | date }} </td>
         </ng-container>
+
+        <ng-container matColumnDef="Product code">
+            <th mat-header-cell *matHeaderCellDef> Product code </th>
+            <td mat-cell *matCellDef="let row"> {{ row.productCode }} </td>
+        </ng-container>
     
         <ng-container matColumnDef="Price">
             <th mat-header-cell *matHeaderCellDef> Total price </th>

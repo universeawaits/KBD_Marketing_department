@@ -14,6 +14,7 @@ namespace KBD_Marketing_department.WEB.Services
 
         private string invoicesTableName;
         private string customersTableName;
+        private string productsTableName;
 
         private IDictionary<string, string> exceptionMessages;
 
@@ -24,11 +25,12 @@ namespace KBD_Marketing_department.WEB.Services
 
             invoicesTableName = "invoices";
             customersTableName = "customers";
+            productsTableName = "products";
 
             exceptionMessages = new Dictionary<string, string>
             {
-                { "23503", "No customer with this document number was found" },
-                { "23505", "Set of all properties remain (except ID) must be unique per invoice" }
+                { "23503", "No customer with this document number or product with this code was found" },
+                { "23505", "Set of all properties remain (except ID and product code) must be unique per invoice" }
             };
         }
 
@@ -53,7 +55,8 @@ namespace KBD_Marketing_department.WEB.Services
                         Adress = (string)reader[2],
                         TotalPrice = (double)reader[3],
                         TotalProductCount = (int)reader[4],
-                        DateTime = (DateTime)reader[5]
+                        DateTime = (DateTime)reader[5],
+                        ProductCode = (int)reader[6]
                     });
                 }
             }
@@ -75,12 +78,36 @@ namespace KBD_Marketing_department.WEB.Services
 
         public async Task<string> CreateInvoiceAsync(Invoice invoice)
         {
+            int productPrice = 0;
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select code from {productsTableName} where code = {invoice.ProductCode}",
+                Connection
+                ))
+            {
+                try
+                {
+                    productPrice = (int)await command.ExecuteScalarAsync();
+                }
+                catch (PostgresException ex)
+                {
+                    if (exceptionMessages.TryGetValue(ex.SqlState, out string message))
+                    {
+                        return message;
+                    }
+                }
+            }
+
+            invoice.TotalPrice = invoice.TotalProductCount * productPrice;
+
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"insert into {invoicesTableName} " +
-                $"(customer_doc, adress, total_price, total_product_count, datetime) values" +
+                $"(customer_doc, adress, total_price, total_product_count, datetime, product_code) values" +
                 $"('{invoice.CustomerDocumentNumber}', '{invoice.Adress}', " +
-                $"{invoice.TotalPrice.ToString().Replace(",", ".")}, {invoice.TotalProductCount}, '{invoice.DateTime.Date}'); ",
+                $"{invoice.TotalPrice.ToString().Replace(",", ".")}, {invoice.TotalProductCount}, '{invoice.DateTime.Date}', " +
+                $"{invoice.ProductCode}); ",
                 Connection
                 ))
             {
@@ -117,12 +144,36 @@ namespace KBD_Marketing_department.WEB.Services
 
         public async Task<string> UpdateInvoice(Invoice invoice)
         {
+            int productPrice = 0;
+
+            using (
+                NpgsqlCommand command = new NpgsqlCommand(
+                $"select code from {productsTableName} where code = {invoice.ProductCode}",
+                Connection
+                ))
+            {
+                try
+                {
+                    productPrice = (int)await command.ExecuteScalarAsync();
+                }
+                catch (PostgresException ex)
+                {
+                    if (exceptionMessages.TryGetValue(ex.SqlState, out string message))
+                    {
+                        return message;
+                    }
+                }
+            }
+
+            invoice.TotalPrice = invoice.TotalProductCount * productPrice;
+
             using (
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"update {invoicesTableName} set " +
                 $"customer_doc = '{invoice.CustomerDocumentNumber}', adress = '{invoice.Adress}'," +
                 $" total_price = {invoice.TotalPrice.ToString().Replace(",", ".")}, " +
-                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime.Date}' " +
+                $"total_product_count = {invoice.TotalProductCount}, datetime = '{invoice.DateTime.Date}'," +
+                $" product_code = {invoice.ProductCode} " +
                 $"where id = {invoice.Id}",
                 Connection
                 ))
@@ -151,7 +202,8 @@ namespace KBD_Marketing_department.WEB.Services
                 NpgsqlCommand command = new NpgsqlCommand(
                 $"select i.datetime, c.name, i.adress, i.total_price from {invoicesTableName} i " +
                 $"inner join {customersTableName} c on c.doc_number = i.customer_doc " +
-                $"where i.total_price = (select MAX(total_price) from {invoicesTableName} i2 where i2.datetime = '{dateTime.Date}')",
+                $"where i.total_price = (select MAX(total_price) from {invoicesTableName} i2 " +
+                $"where i2.datetime = '{dateTime.Date}')",
                 Connection
                 ))
             {

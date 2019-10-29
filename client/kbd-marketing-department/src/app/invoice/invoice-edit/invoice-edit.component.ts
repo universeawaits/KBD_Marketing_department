@@ -30,7 +30,7 @@ export class InvoiceEditComponent implements OnInit {
           'datetime': new FormControl('', Validators.required),
           'adress': new FormControl(invoice.adress, Validators.required),
           'customerDoc': new FormControl(invoice.customerDocumentNumber, Validators.required),
-          'totalPrice': new FormControl(invoice.totalPrice, Validators.required),
+          'productCode': new FormControl(invoice.productCode, Validators.required),
           'totalCount': new FormControl(invoice.totalProductCount, Validators.required)
         });
       }
@@ -47,7 +47,7 @@ export class InvoiceEditComponent implements OnInit {
       dateTime: date,
       adress: this.editForm.get('adress').value,
       customerDocumentNumber: this.editForm.get('customerDoc').value,
-      totalPrice: this.editForm.get('totalPrice').value,
+      productCode: this.editForm.get('productCode').value,
       totalProductCount: this.editForm.get('totalCount').value,
     };
 

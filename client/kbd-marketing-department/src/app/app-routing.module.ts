@@ -8,7 +8,8 @@ import { InvoiceDashboardComponent } from './invoice/invoice-dashboard/invoice-d
 const routes: Routes = [
   { path: 'products', component: ProductDashboardComponent },
   { path: 'customers', component: CustomerDashboardComponent },
-  { path: 'invoices', component: InvoiceDashboardComponent }
+  { path: 'invoices', component: InvoiceDashboardComponent },
+  { path: '**', redirectTo: 'products'}
 ];
 
 @NgModule({
