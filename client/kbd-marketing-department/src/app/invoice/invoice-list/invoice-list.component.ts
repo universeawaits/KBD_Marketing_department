@@ -22,7 +22,6 @@ export class InvoiceListComponent implements OnInit {
     'Actions'
   ];
   dataSource: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   invoices: any[];
 
@@ -40,7 +39,6 @@ export class InvoiceListComponent implements OnInit {
       products => {
         this.invoices = products;
         this.dataSource = new MatTableDataSource(this.invoices);
-        this.dataSource.paginator = this.paginator;
       }
     );
 

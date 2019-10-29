@@ -20,7 +20,6 @@ export class CustomersListComponent implements OnInit {
     'Actions'
   ];
   dataSource: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   customers = [];
 
